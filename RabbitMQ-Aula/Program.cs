@@ -26,7 +26,7 @@ namespace RabbitMQ_Aula
                 {
                     var consumer = new EventingBasicConsumer(channel);
                     consumer.Received += Consumer_Received;
-                    channel.BasicConsume("15net", true, consumer);
+                    channel.BasicConsume("ReceberMsgResp", true, consumer);
 
                     Console.ReadLine();
                 }
@@ -57,9 +57,7 @@ namespace RabbitMQ_Aula
                         Value = msg
                     };
 
-                    var r = await producer.ProduceAsync(topic, message);
-
-                    r.ToString();
+                    await producer.ProduceAsync(topic, message);
                 }            }
             catch
             {

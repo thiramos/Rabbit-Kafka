@@ -18,7 +18,6 @@ namespace ConsoleApp2
                 HostName = "23.99.218.43"
             };
 
-            var body = Encoding.UTF8.GetBytes("P1: Qual é a capital do Brasil?");
 
             using (var connection = factory.CreateConnection())
             {
@@ -26,8 +25,10 @@ namespace ConsoleApp2
                 {
                     for (int i = 0; i < 10000; i++)
                     {
-                        channel.BasicPublish(exchange: "",
-                                            routingKey: "15net",
+                        var body = Encoding.UTF8.GetBytes("P" + i + ": Qual é a capital do Brasil?");
+
+                        channel.BasicPublish(exchange: "EnviarMensagem",
+                                            routingKey: "",
                                             basicProperties: null,
                                             body: body);
 
